@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACF2L - Aéroclub de Frotey-les-Lures | ULM & Aviation Légère</title>
+    <meta name="description" content="Aéroclub de Frotey-les-Lures (ACF2L) - École de pilotage ULM, baptêmes de l'air, maintenance, hébergement et hangars en Haute-Saône.">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            /* Palette de couleurs */
+            --c-primary: #3F6978;       /* Bleu ardoise */
+            --c-secondary-1: #BDD6DF;   /* Bleu brume */
+            --c-secondary-2: #ABC4B0;   /* Vert sauge */
+            --c-tertiary: #E9B6A0;      /* Abricot poudré */
+            --c-neutral-light: #F7F9F8; /* Blanc cassé */
+            --c-white: #FFFFFF;         /* Blanc */
+            --c-night: #263B45;         /* Bleu nuit */
+            --c-gray-blue: #61737D;     /* Gris bleuté */
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--c-neutral-light);
+            color: var(--c-night);
+            scroll-behavior: smooth;
+        }
+
+        /* Top Bar */
+        .top-bar-custom {
+            background-color: var(--c-night);
+            color: var(--c-secondary-1);
+            font-size: 0.88rem;
+            padding: 7px 0;
+        }
+        .top-bar-custom a {
+            color: var(--c-secondary-1);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .top-bar-custom a:hover {
+            color: var(--c-tertiary);
+        }
+
+        /* Navigation */
+        .navbar-custom {
+            background-color: var(--c-white);
+            box-shadow: 0 4px 18px rgba(38, 59, 69, 0.08);
+            transition: all 0.3s ease;
+        }
+        .navbar-custom .navbar-brand {
+            font-weight: 700;
+            color: var(--c-night);
+            letter-spacing: -0.5px;
+        }
+        .navbar-custom .navbar-brand span {
+            color: var(--c-primary);
+        }
+        .navbar-custom .nav-link {
+            color: var(--c-night);
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            color: var(--c-primary);
+            background-color: rgba(189, 214, 223, 0.2);
+        }
+
+        /* Hero Carousel */
+        .hero-carousel-item {
+            height: 72vh;
+            min-height: 480px;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(38, 59, 69, 0.72) 0%, rgba(38, 59, 69, 0.88) 100%);
+            display: flex;
+            align-items: center;
+        }
+        .hero-badge {
+            background-color: rgba(171, 196, 176, 0.25);
+            color: #d8f1dc;
+            border: 1px solid var(--c-secondary-2);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Boutons personnalisés */
+        .btn-brand-primary {
+            background-color: var(--c-primary);
+            color: var(--c-white);
+            border: none;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 10px 22px;
+            transition: all 0.2s ease;
+        }
+        .btn-brand-primary:hover {
+            background-color: #31535f;
+            color: var(--c-white);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(63, 105, 120, 0.35);
+        }
+
+        .btn-brand-tertiary {
+            background-color: var(--c-tertiary);
+            color: var(--c-night);
+            border: none;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 10px 22px;
+            transition: all 0.2s ease;
+        }
+        .btn-brand-tertiary:hover {
+            background-color: #dca087;
+            color: var(--c-night);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(233, 182, 160, 0.45);
+        }
+
+        .btn-brand-outline {
+            border: 2px solid var(--c-secondary-1);
+            color: var(--c-white);
+            background: transparent;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 9px 20px;
+            transition: all 0.2s ease;
+        }
+        .btn-brand-outline:hover {
+            background: var(--c-secondary-1);
+            color: var(--c-night);
+        }
+
+        /* Section Headings */
+        .section-tag {
+            color: var(--c-primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.82rem;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+        }
+        .section-title {
+            color: var(--c-night);
+            font-weight: 800;
+            font-size: 2.1rem;
+            margin-bottom: 1rem;
+        }
+        .section-desc {
+            color: var(--c-gray-blue);
+            font-size: 1.05rem;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* Cartes modernes */
+        .card-custom {
+            border: 1px solid rgba(189, 214, 223, 0.5);
+            background: var(--c-white);
+            border-radius: 12px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            height: 100%;
+            overflow: hidden;
+        }
+        .card-custom:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(38, 59, 69, 0.08);
+            border-color: var(--c-secondary-2);
+        }
+
+        .card-icon-box {
+            width: 52px;
+            height: 52px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.45rem;
+            margin-bottom: 1.25rem;
+        }
+        .bg-box-primary { background: rgba(63, 105, 120, 0.12); color: var(--c-primary); }
+        .bg-box-sage { background: rgba(171, 196, 176, 0.25); color: #43694b; }
+        .bg-box-apricot { background: rgba(233, 182, 160, 0.25); color: #a45a3c; }
+
+        /* Badges de statut flotte */
+        .badge-flotte {
+            background-color: var(--c-secondary-2);
+            color: #24412c;
+            font-weight: 600;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        /* Galerie */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(38, 59, 69, 0.65);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: white;
+            font-size: 1.8rem;
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Moyen Pédagogique - List check */
+        .feature-icon-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+        .feature-icon-item i {
+            color: var(--c-primary);
+            font-size: 1.25rem;
+            margin-top: 1px;
+        }
+
+        /* Footer */
+        .footer-custom {
+            background-color: var(--c-night);
+            color: var(--c-secondary-1);
+            padding: 60px 0 25px;
+        }
+        .footer-custom h5 {
+            color: var(--c-white);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .footer-custom a {
+            color: var(--c-secondary-1);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .footer-custom a:hover {
+            color: var(--c-tertiary);
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+            padding-top: 20px;
+            font-size: 0.85rem;
+            color: var(--c-gray-blue);
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#mainNavbar" data-bs-offset="100">
+
+    <div class="top-bar-custom">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <div class="d-flex align-items-center gap-3">
+                    <span class="d-inline-flex align-items-center gap-1">
+                        <i class="bi bi-geo-alt-fill text-white-50"></i> Frotey-lès-Lure (70200)
+                    </span>
+                    <span class="d-none d-sm-inline opacity-50">|</span>
+                    <span class="d-none d-sm-inline">Assoc. n°04674 - Agrément AS70986858</span>
+                </div>
+                <div class="d-flex align-items-center gap-4">
+                    <a href="mailto:acf2l@gmail.com" class="d-inline-flex align-items-center gap-1">
+                        <i class="bi bi-envelope-fill"></i> acf2l@gmail.com
+                    </a>
+                    <a href="tel:+33160566060" class="d-inline-flex align-items-center gap-1">
+                        <i class="bi bi-telephone-fill"></i> +33 01 60 56 60 60
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top" id="mainNavbar">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#home">
+                <i class="bi bi-send-fill fs-3 text-primary" style="color: var(--c-primary) !important;"></i>
+                <div>
+                    <span class="fw-bold tracking-tight">ACF2L</span>
+                    <small class="d-block text-secondary text-uppercase fw-semibold" style="font-size: 0.65rem; letter-spacing: 0.5px;">Aéroclub Frotey-Les-Lures</small>
+                </div>
+            </a>
+            
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Menu">
+                <i class="bi bi-list fs-2 text-dark"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#activites">Nos Activités</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#ulm">Classes d'ULM</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#moyens">Moyens Pédagogiques</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#galerie">Galerie</a></li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <a class="btn btn-brand-primary btn-sm px-3" href="#contact">Contact & Baptêmes</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home">
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1600&q=80');">
+                    <div class="hero-overlay">
+                        <div class="container">
+                            <div class="col-lg-8">
+                                <span class="hero-badge"><i class="bi bi-airplane me-1"></i> Aéro-Club de Frotey-Les-Lures</span>
+                                <h1 class="display-4 fw-bold text-white mb-3">L'aviation ultralégère à portée d'ailes</h1>
+                                <p class="lead text-white-50 mb-4">Formation de pilotes, baptêmes de l'air et passion du vol dans un cadre naturel exceptionnel au cœur de la Haute-Saône.</p>
+                                <div class="d-flex flex-wrap gap-3">
+                                    <a href="#contact" class="btn btn-brand-tertiary">Réserver un baptême</a>
+                                    <a href="#activites" class="btn btn-brand-outline">Découvrir l'aéroclub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1519074069444-1ba4ea16e6f9?auto=format&fit=crop&w=1600&q=80');">
+                    <div class="hero-overlay">
+                        <div class="container">
+                            <div class="col-lg-8">
+                                <span class="hero-badge"><i class="bi bi-mortarboard me-1"></i> École certifiée FFULM</span>
+                                <h1 class="display-4 fw-bold text-white mb-3">Devenez pilote d'ULM à votre rythme</h1>
+                                <p class="lead text-white-50 mb-4">Des instructeurs brevetés d'État, des simulateurs modernes et des installations adaptées pour concrétiser votre rêve d'altitude.</p>
+                                <div class="d-flex flex-wrap gap-3">
+                                    <a href="#moyens" class="btn btn-brand-primary">Nos installations</a>
+                                    <a href="#ulm" class="btn btn-brand-outline">Voir la flotte</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1600&q=80');">
+                    <div class="hero-overlay">
+                        <div class="container">
+                            <div class="col-lg-8">
+                                <span class="hero-badge"><i class="bi bi-geo-alt me-1"></i> Base Aéronautique Privée</span>
+                                <h1 class="display-4 fw-bold text-white mb-3">45 hectares & hydrosurface dédiée</h1>
+                                <p class="lead text-white-50 mb-4">Deux pistes en croix, hébergement pour stagiaires et hangars pour accueillir votre appareil dans les meilleures conditions.</p>
+                                <div class="d-flex flex-wrap gap-3">
+                                    <a href="#contact" class="btn btn-brand-tertiary">Nous rejoindre</a>
+                                    <a href="#moyens" class="btn btn-brand-outline">En savoir plus</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Précédent</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Suivant</span>
+            </button>
+        </div>
+    </section>
+
+    <section class="py-5" id="activites">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <p class="section-tag">Activités & Services</p>
+                <h2 class="section-title">Ce que nous proposons</h2>
+                <p class="section-desc">Association Loi 1901 agréée Jeunesse et Sports, affiliée à la <strong>FFULM</strong>. Nous assurons un encadrement rigoureux et complet du monde ultraléger.</p>
+            </div>
+
+            <!-- Principales activités -->
+            <div class="row g-4 mb-5">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-custom p-4">
+                        <div class="card-icon-box bg-box-primary">
+                            <i class="bi bi-compass"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2">Formation Pilotes & Instructeurs</h4>
+                        <p class="text-secondary small mb-3">Cours théoriques complets et apprentissage pratique sur multiaxes et pendulaires pour vous mener jusqu'au brevet.</p>
+                        <span class="text-primary fw-semibold small mt-auto">Formation homologuée <i class="bi bi-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-custom p-4">
+                        <div class="card-icon-box bg-box-apricot">
+                            <i class="bi bi-sun"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2">Baptêmes de l'Air</h4>
+                        <p class="text-secondary small mb-3">Découvrez la Haute-Saône, les Vosges du Sud et la région des Mille Étangs vue du ciel lors d'un vol inoubliable.</p>
+                        <span class="text-primary fw-semibold small mt-auto">Ouvert à tous les âges <i class="bi bi-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-custom p-4">
+                        <div class="card-icon-box bg-box-sage">
+                            <i class="bi bi-wrench-adjustable"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2">Maintenance & Réparation</h4>
+                        <p class="text-secondary small mb-3">Entretien cellule, révision moteur et suivi rigoureux de navigabilité au sein de notre atelier mécanique dédié.</p>
+                        <span class="text-primary fw-semibold small mt-auto">Atelier certifié <i class="bi bi-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-custom p-4">
+                        <div class="card-icon-box bg-box-sage">
+                            <i class="bi bi-broadcast-pin"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2">Montage & Avionique</h4>
+                        <p class="text-secondary small mb-3">Installation d'instruments de navigation de précision : compas, radio VHF 8.33, transpondeur mode S, GPS et tablettes bord.</p>
+                        <span class="text-primary fw-semibold small mt-auto">Expertise technique <i class="bi bi-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-custom p-4">
+                        <div class="card-icon-box bg-box-primary">
+                            <i class="bi bi-houses"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2">Hébergement Stagiaires</h4>
+                        <p class="text-secondary small mb-3">Facilitez vos stages intensifs grâce à nos 3 studios et 6 chambres meublées directement sur la plateforme aéronautique.</p>
+                        <span class="text-primary fw-semibold small mt-auto">Sur place & équipé <i class="bi bi-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-custom p-4">
+                        <div class="card-icon-box bg-box-apricot">
+                            <i class="bi bi-buildings"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2">Location de Hangars</h4>
+                        <p class="text-secondary small mb-3">Espaces abrités sécurisés pour les propriétaires d'ULM privés avec accès direct et dégagé aux pistes.</p>
+                        <span class="text-primary fw-semibold small mt-auto">Places sécurisées <i class="bi bi-arrow-right"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bandeau de statut associatif -->
+            <div class="p-4 rounded-3 text-white" style="background-color: var(--c-night);">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h5 class="fw-bold mb-1"><i class="bi bi-patch-check-fill text-warning me-2"></i> Club agréé Jeunesse et Sports</h5>
+                        <p class="small text-white-50 mb-lg-0">Siège social : 62, Avenue de la République, 70200 Lure. Restauration rapide et club-house conviviaux disponibles toute la saison.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <a href="#contact" class="btn btn-brand-tertiary">Prendre rendez-vous</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-white border-top border-bottom" id="ulm">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <p class="section-tag">Flotte & Réglementation</p>
+                <h2 class="section-title">Les 6 Catégories d'ULM</h2>
+                <p class="section-desc">La réglementation française distingue 6 classes d'aéronefs ultralégers motorisés. L'ACF2L dispose sur son aérodrome de <strong>3 types d'appareils</strong> opérationnels.</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Classe 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-custom">
+                        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Paramoteur" style="height: 180px; object-fit: cover;">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-light text-dark border">Classe 1</span>
+                            </div>
+                            <h5 class="fw-bold mb-2">Le Paramoteur</h5>
+                            <p class="text-secondary small mb-3">Aile souple de type parapente propulsée par un groupe motopropulseur fixé sur le dos du pilote ou sur un chariot à roulettes.</p>
+                            <div class="small text-muted"><i class="bi bi-speedometer2 me-1"></i> Vol contemplatif & liberté totale</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classe 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-custom border-primary">
+                        <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Pendulaire" style="height: 180px; object-fit: cover;">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-light text-dark border">Classe 2</span>
+                                <span class="badge-flotte"><i class="bi bi-check2-circle"></i> Flotte ACF2L</span>
+                            </div>
+                            <h5 class="fw-bold mb-2">Le Pendulaire</h5>
+                            <p class="text-secondary small mb-3">Aile delta rigide sous laquelle est suspendu un chariot motorisé. Le pilotage se fait par déplacement du centre de gravité à l'aide du trapèze.</p>
+                            <div class="small text-muted"><i class="bi bi-check-lg text-success me-1"></i> Disponible en formation & vol</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classe 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-custom border-primary">
+                        <img src="https://images.unsplash.com/photo-1519074069444-1ba4ea16e6f9?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Multiaxes" style="height: 180px; object-fit: cover;">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-light text-dark border">Classe 3</span>
+                                <span class="badge-flotte"><i class="bi bi-check2-circle"></i> Flotte ACF2L</span>
+                            </div>
+                            <h5 class="fw-bold mb-2">Le Multiaxes</h5>
+                            <p class="text-secondary small mb-3">Aéronef à allure d'avion traditionnel se pilotant à l'aide des gouvernes sur les trois axes (profondeur, gauchissement et direction).</p>
+                            <div class="small text-muted"><i class="bi bi-check-lg text-success me-1"></i> Appareil phare pour les navigations</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classe 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-custom border-primary">
+                        <img src="https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Autogire" style="height: 180px; object-fit: cover;">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-light text-dark border">Classe 4</span>
+                                <span class="badge-flotte"><i class="bi bi-check2-circle"></i> Flotte ACF2L</span>
+                            </div>
+                            <h5 class="fw-bold mb-2">L'Autogire Ultraléger</h5>
+                            <p class="text-secondary small mb-3">La portance est assurée par un rotor tournant en autorotation sous l'action du vent relatif, tandis qu'une hélice fournit la poussée.</p>
+                            <div class="small text-muted"><i class="bi bi-check-lg text-success me-1"></i> Grande stabilité face aux turbulences</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classe 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-custom">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Aérostat" style="height: 180px; object-fit: cover;">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-light text-dark border">Classe 5</span>
+                            </div>
+                            <h5 class="fw-bold mb-2">L’Aérostat Ultraléger</h5>
+                            <p class="text-secondary small mb-3">Petit ballon à air chaud ou dirigeable de dimension contenue répondant aux plafonds de masse et de puissance ultralégers.</p>
+                            <div class="small text-muted"><i class="bi bi-wind me-1"></i> Navigation douce et silencieuse</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classe 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-custom">
+                        <img src="https://images.unsplash.com/photo-1520697830682-bbb6e85e2b0b?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Hélicoptère" style="height: 180px; object-fit: cover;">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-light text-dark border">Classe 6</span>
+                            </div>
+                            <h5 class="fw-bold mb-2">L’Hélicoptère Ultraléger</h5>
+                            <p class="text-secondary small mb-3">Voilure tournante entraînée directement par le moteur, autorisant le vol stationnaire et une grande maniabilité verticale.</p>
+                            <div class="small text-muted"><i class="bi bi-gear-wide-connected me-1"></i> Technologie de vol avancée</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5" id="moyens" style="background-color: var(--c-neutral-light);">
+        <div class="container py-4">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" class="img-fluid rounded-4 shadow-sm" alt="Infrastructures aérodrome">
+                        <div class="position-absolute bottom-0 start-0 translate-middle-y bg-white p-3 rounded-3 shadow-lg ms-4 border-start border-4 border-primary d-none d-sm-block">
+                            <div class="d-flex align-items-center gap-3">
+                                <i class="bi bi-water text-primary fs-2"></i>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">Hydrosurface dédiée</h6>
+                                    <small class="text-muted">Bassin de 8 hectares</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <p class="section-tag">Infrastructures & Équipements</p>
+                    <h2 class="section-title">Nos moyens pédagogiques</h2>
+                    <p class="lead text-secondary mb-4">Un aérodrome privé complet avec possibilité d'hébergement sur place dans un cadre naturel exceptionnel pour un apprentissage optimal.</p>
+
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <div class="feature-icon-item">
+                                <i class="bi bi-fullscreen"></i>
+                                <div>
+                                    <strong>45 hectares dégagés</strong>
+                                    <div class="text-secondary small">Vaste plateforme aéronautique sécurisée.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="feature-icon-item">
+                                <i class="bi bi-x-octagon"></i>
+                                <div>
+                                    <strong>2 Pistes en X</strong>
+                                    <div class="text-secondary small">800 m et 450 m pour tout vent.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="feature-icon-item">
+                                <i class="bi bi-water"></i>
+                                <div>
+                                    <strong>Hydrosurface (8 ha)</strong>
+                                    <div class="text-secondary small">Rare plan d'eau pour hydravions/hydro-ULM.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="feature-icon-item">
+                                <i class="bi bi-shield-shaded"></i>
+                                <div>
+                                    <strong>3 Hangars (4 300 m²)</strong>
+                                    <div class="text-secondary small">Grands volumes couverts et abrités.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="feature-icon-item">
+                                <i class="bi bi-display"></i>
+                                <div>
+                                    <strong>Simulateur de vol</strong>
+                                    <div class="text-secondary small">Salle multimédia interactive moderne.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="feature-icon-item">
+                                <i class="bi bi-tools"></i>
+                                <div>
+                                    <strong>Atelier de réparation</strong>
+                                    <div class="text-secondary small">Outillage complet mécanique & radio.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="feature-icon-item">
+                                <i class="bi bi-cup-hot"></i>
+                                <div>
+                                    <strong>Accueil & Restauration</strong>
+                                    <div class="text-secondary small">Bar, snack et sanitaires élèves.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="feature-icon-item">
+                                <i class="bi bi-wifi"></i>
+                                <div>
+                                    <strong>Wi-Fi Gratuit</strong>
+                                    <div class="text-secondary small">Couverture sur l'ensemble de la base.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-white" id="galerie">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <p class="section-tag">Photothèque</p>
+                <h2 class="section-title">La vie du club en images</h2>
+                <p class="section-desc">Nos membres, appareils et vols d'initiation au-dessus de nos pistes et des paysages francs-comtois.</p>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="gallery-item" onclick="openPhotoModal('https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1200&q=80', 'Vol d\'initiation en pendulaire')">
+                        <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=600&q=80" alt="Vol ULM" loading="lazy">
+                        <div class="gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="gallery-item" onclick="openPhotoModal('https://images.unsplash.com/photo-1519074069444-1ba4ea16e6f9?auto=format&fit=crop&w=1200&q=80', 'Multiaxes au décollage')">
+                        <img src="https://images.unsplash.com/photo-1519074069444-1ba4ea16e6f9?auto=format&fit=crop&w=600&q=80" alt="Multiaxes" loading="lazy">
+                        <div class="gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="gallery-item" onclick="openPhotoModal('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80', 'Préparation avant vol')">
+                        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" alt="Appareils au sol" loading="lazy">
+                        <div class="gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="gallery-item" onclick="openPhotoModal('https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1200&q=80', 'Autogire en vol de patrouille')">
+                        <img src="https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=600&q=80" alt="Autogire" loading="lazy">
+                        <div class="gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="gallery-item" onclick="openPhotoModal('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80', 'Vue aérienne au-dessus de la base')">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Vue du ciel" loading="lazy">
+                        <div class="gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="gallery-item" onclick="openPhotoModal('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80', 'Vue sur la piste 800m')">
+                        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=600&q=80" alt="Piste d'atterrissage" loading="lazy">
+                        <div class="gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="gallery-item" onclick="openPhotoModal('https://images.unsplash.com/photo-1520697830682-bbb6e85e2b0b?auto=format&fit=crop&w=1200&q=80', 'Atelier et maintenance mécanique')">
+                        <img src="https://images.unsplash.com/photo-1520697830682-bbb6e85e2b0b?auto=format&fit=crop&w=600&q=80" alt="Hangar ACF2L" loading="lazy">
+                        <div class="gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="gallery-item" onclick="openPhotoModal('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80', 'Coucher de soleil sur l\'aérodrome')">
+                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" alt="Coucher de soleil" loading="lazy">
+                        <div class="gallery-overlay"><i class="bi bi-zoom-in"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5" id="contact" style="background-color: var(--c-neutral-light);">
+        <div class="container py-4">
+            <div class="row g-5">
+                <!-- Informations du club -->
+                <div class="col-lg-5">
+                    <p class="section-tag">Coordonnées</p>
+                    <h2 class="section-title">Contactez l'aéroclub</h2>
+                    <p class="text-secondary mb-4">Notre équipe de bénévoles et instructeurs se fera un plaisir de répondre à toutes vos interrogations sur nos formules d'initiation et d'adhésion.</p>
+
+                    <div class="d-flex align-items-start gap-3 mb-4">
+                        <div class="card-icon-box bg-box-primary flex-shrink-0" style="width: 44px; height: 44px;">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Siège & Correspondance</h6>
+                            <p class="text-secondary small mb-0">62, Avenue de la République, 70200 Lure</p>
+                            <p class="text-secondary small mb-0">Aérodrome : Pistes privées de Frotey-lès-Lure</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-start gap-3 mb-4">
+                        <div class="card-icon-box bg-box-sage flex-shrink-0" style="width: 44px; height: 44px;">
+                            <i class="bi bi-telephone-fill"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Téléphone</h6>
+                            <p class="text-secondary small mb-0"><a href="tel:+33160566060" class="text-decoration-none text-secondary">+33 01 60 56 60 60</a></p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-start gap-3 mb-4">
+                        <div class="card-icon-box bg-box-apricot flex-shrink-0" style="width: 44px; height: 44px;">
+                            <i class="bi bi-envelope-fill"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Courriel</h6>
+                            <p class="text-secondary small mb-0"><a href="mailto:acf2l@gmail.com" class="text-decoration-none text-secondary">acf2l@gmail.com</a></p>
+                        </div>
+                    </div>
+
+                    <div class="card p-3 border-0 bg-white rounded-3 shadow-sm">
+                        <div class="d-flex justify-content-between text-center">
+                            <div>
+                                <h6 class="fw-bold mb-0 text-primary">Agrément</h6>
+                                <small class="text-muted">AS70986858</small>
+                            </div>
+                            <div class="border-start border-end px-3">
+                                <h6 class="fw-bold mb-0 text-primary">Affiliation</h6>
+                                <small class="text-muted">FFULM n°04674</small>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0 text-primary">Région</h6>
+                                <small class="text-muted">Haute-Saône</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulaire interactif -->
+                <div class="col-lg-7">
+                    <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
+                        <h4 class="fw-bold mb-2">Envoyez-nous un message</h4>
+                        <p class="text-secondary small mb-4">Remplissez les champs ci-dessous. Nous vous répondrons dans les plus brefs délais.</p>
+
+                        <!-- Notification Message -->
+                        <div id="formAlertBox" class="alert alert-success d-none align-items-center gap-2" role="alert">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <div>Merci ! Votre message a bien été envoyé. L'équipe d'ACF2L vous recontactera rapidement.</div>
+                        </div>
+
+                        <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Votre Nom & Prénom</label>
+                                    <input type="text" class="form-control" id="formName" placeholder="Ex: Jean Dupont" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Adresse Email</label>
+                                    <input type="email" class="form-control" id="formEmail" placeholder="jean.dupont@email.fr" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Numéro de téléphone</label>
+                                    <input type="tel" class="form-control" id="formPhone" placeholder="06 12 34 56 78">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Objet de la demande</label>
+                                    <select class="form-select" id="formSubject" required>
+                                        <option value="" selected disabled>Choisir un sujet...</option>
+                                        <option value="bapteme">Baptême de l'air</option>
+                                        <option value="formation">Formation pilote / instructeur</option>
+                                        <option value="hangar">Hébergement ou Hangar ULM</option>
+                                        <option value="maintenance">Maintenance et atelier</option>
+                                        <option value="autre">Autre question</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small fw-semibold">Votre message</label>
+                                    <textarea class="form-control" id="formMessage" rows="4" placeholder="Précisez votre demande, vos disponibilités ou vos questions..." required></textarea>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-brand-primary w-100 py-2 fs-6">
+                                        <i class="bi bi-send me-1"></i> Envoyer le message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-custom">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="d-flex align-items-center gap-2">
+                        <i class="bi bi-send-fill text-primary" style="color: var(--c-secondary-1) !important;"></i> ACF2L
+                    </h5>
+                    <p class="small text-white-50">Aéro-Club de Frotey-Les-Lures. Pratique de l'ULM, formation de pilotes et découverte du vol dans un cadre naturel protégé et convivial.</p>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="#" class="fs-5 text-white-50"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="fs-5 text-white-50"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="fs-5 text-white-50"><i class="bi bi-youtube"></i></a>
+                        <a href="#" class="fs-5 text-white-50"><i class="bi bi-envelope"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5>Navigation</h5>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 mb-0">
+                        <li><a href="#home">Accueil</a></li>
+                        <li><a href="#activites">Nos activités</a></li>
+                        <li><a href="#ulm">Classes d'ULM</a></li>
+                        <li><a href="#moyens">Moyens pédagogiques</a></li>
+                        <li><a href="#galerie">Galerie photos</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Prestations</h5>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 mb-0">
+                        <li><a href="#contact">Baptêmes de l'air</a></li>
+                        <li><a href="#activites">Brevet de pilote ULM</a></li>
+                        <li><a href="#moyens">Location d'emplacements hangars</a></li>
+                        <li><a href="#moyens">Chambres & studios stagiaires</a></li>
+                        <li><a href="#activites">Maintenance & avionique</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h5>Secrétariat</h5>
+                    <p class="small text-white-50 mb-1"><i class="bi bi-geo-alt me-1"></i> 62, Avenue de la République, 70200 Lure</p>
+                    <p class="small text-white-50 mb-1"><i class="bi bi-telephone me-1"></i> +33 01 60 56 60 60</p>
+                    <p class="small text-white-50 mb-3"><i class="bi bi-envelope me-1"></i> acf2l@gmail.com</p>
+                    <span class="badge" style="background-color: var(--c-primary);">FFULM n°04674</span>
+                </div>
+            </div>
+
+            <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <div>
+                    &copy; 2026 ACF2L - Aéroclub de Frotey-Les-Lures. Tous droits réservés.
+                </div>
+                <div>
+                    Association Loi 1901 | Agrément n° AS70986858
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 bg-transparent">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+                <div class="modal-body text-center p-0">
+                    <img id="modalImageTarget" src="" class="img-fluid rounded-3 shadow-lg mb-2" alt="Agrandissement photo">
+                    <p id="modalCaptionTarget" class="text-white-50 small mb-0"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5.3 Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Modal zoom galerie
+        const photoModalElement = document.getElementById('photoModal');
+        const bsPhotoModal = new bootstrap.Modal(photoModalElement);
+        const modalImg = document.getElementById('modalImageTarget');
+        const modalCaption = document.getElementById('modalCaptionTarget');
+
+        function openPhotoModal(imageUrl, caption) {
+            modalImg.src = imageUrl;
+            modalCaption.textContent = caption || 'ACF2L - Aéroclub de Frotey-Les-Lures';
+            bsPhotoModal.show();
+        }
+
+        // Gestionnaire formulaire sans popup intrusive (sans alert)
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const alertBox = document.getElementById('formAlertBox');
+            alertBox.classList.remove('d-none');
+            alertBox.classList.add('d-flex');
+            
+            // Réinitialisation des champs
+            document.getElementById('contactForm').reset();
+
+            // Masquer automatiquement après 6 secondes
+            setTimeout(() => {
+                alertBox.classList.add('d-none');
+                alertBox.classList.remove('d-flex');
+            }, 6000);
+        }
+    </script>
+</body>
+</html>
